@@ -44,7 +44,3 @@ Webcam / Image Upload
 - Local SQLite inspection history log
 - Rolling defect-rate trend chart
 
-## Project background
-Builds on an earlier AI-based bread quality indicator system
-(ESP32-CAM + MobileNetV2), retargeted here as a fully software-based
-Windows application for Snapdragon-powered laptops.

@@ -13,9 +13,10 @@ model is dropped in. Wire in your trained model to go live.
 
 ## Run it
 ```bash
-cd app
-pip install -r requirements.txt
-python main.py
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install -r .\app\requirements.txt
+python .\app\smartqc_main.py
 ```
 
 ## Wiring in your model

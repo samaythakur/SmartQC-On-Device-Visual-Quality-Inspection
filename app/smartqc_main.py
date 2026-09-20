@@ -28,7 +28,8 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QPushButton,
     QVBoxLayout, QHBoxLayout, QFileDialog, QComboBox, QListWidget,
-    QListWidgetItem, QGroupBox, QSplitter, QTabWidget
+    QListWidgetItem, QGroupBox, QSplitter, QTabWidget, QSlider,
+    QTableWidget, QTableWidgetItem
 )
  
 try:
@@ -254,6 +255,30 @@ class SmartQCWindow(QMainWindow):
  
         left_layout.addLayout(controls)
  
+        # -- Confidence threshold control --------------------------------
+        threshold_row = QHBoxLayout()
+        threshold_row.addWidget(QLabel("Confidence threshold:"))
+        self.threshold_slider = QSlider(Qt.Horizontal)
+        self.threshold_slider.setMinimum(50)
+        self.threshold_slider.setMaximum(99)
+        self.threshold_slider.setValue(70)
+        self.threshold_slider.setTickPosition(QSlider.TicksBelow)
+        self.threshold_slider.setTickInterval(5)
+        self.threshold_slider.valueChanged.connect(self._update_threshold_label)
+        threshold_row.addWidget(self.threshold_slider)
+ 
+        self.threshold_value_label = QLabel("70%")
+        self.threshold_value_label.setMinimumWidth(40)
+        threshold_row.addWidget(self.threshold_value_label)
+        left_layout.addLayout(threshold_row)
+ 
+        self.threshold_hint = QLabel(
+            "Predictions below this confidence are flagged UNCERTAIN instead of forced good/bad."
+        )
+        self.threshold_hint.setStyleSheet("color:#888; font-size:11px;")
+        self.threshold_hint.setWordWrap(True)
+        left_layout.addWidget(self.threshold_hint)
+ 
         self.result_label = QLabel("Result: —")
         self.result_label.setStyleSheet("font-size:16px; font-weight:bold; padding:8px;")
         left_layout.addWidget(self.result_label)
@@ -317,11 +342,38 @@ class SmartQCWindow(QMainWindow):
  
         right.addTab(explain_tab, "Explainability")
  
+        batch_tab = QWidget()
+        batch_layout = QVBoxLayout(batch_tab)
+ 
+        batch_controls = QHBoxLayout()
+        self.batch_folder_btn = QPushButton("Select Folder to Batch Inspect")
+        self.batch_folder_btn.clicked.connect(self._run_batch_inspection)
+        batch_controls.addWidget(self.batch_folder_btn)
+        batch_layout.addLayout(batch_controls)
+ 
+        self.batch_summary_label = QLabel("No batch run yet.")
+        self.batch_summary_label.setStyleSheet("font-weight:bold; padding:4px;")
+        batch_layout.addWidget(self.batch_summary_label)
+ 
+        self.batch_table = QTableWidget()
+        self.batch_table.setColumnCount(4)
+        self.batch_table.setHorizontalHeaderLabels(["File", "Result", "Confidence", "Latency (ms)"])
+        self.batch_table.horizontalHeader().setStretchLastSection(True)
+        batch_layout.addWidget(self.batch_table)
+ 
+        self.batch_export_btn = QPushButton("Export Results to CSV")
+        self.batch_export_btn.clicked.connect(self._export_batch_csv)
+        self.batch_export_btn.setEnabled(False)
+        batch_layout.addWidget(self.batch_export_btn)
+ 
+        right.addTab(batch_tab, "Batch Inspect")
+ 
         splitter.addWidget(right)
         splitter.setSizes([650, 450])
  
         self._refresh_history()
         self._gradcam = None  # lazy-loaded on first use
+        self._batch_results = []  # populated by _run_batch_inspection
  
     # -- Webcam -----------------------------------------------------------
  
@@ -366,6 +418,9 @@ class SmartQCWindow(QMainWindow):
  
     # -- Inspection ---------------------------------------------------------
  
+    def _update_threshold_label(self, value):
+        self.threshold_value_label.setText(f"{value}%")
+ 
     def _run_inspection(self):
         if self.current_frame is None:
             self.result_label.setText("Result: no frame captured yet")
@@ -379,10 +434,17 @@ class SmartQCWindow(QMainWindow):
         self._refresh_history()
  
     def _apply_result(self, result: InferenceResult):
-        color = "#2ecc71" if result.label == "good" else "#e74c3c"
-        self.result_label.setText(f"Result: {result.label.upper()}  ({result.confidence*100:.1f}%)")
+        threshold = self.threshold_slider.value() / 100.0
+        if result.confidence < threshold:
+            color = "#e0a325"
+            display_text = f"Result: UNCERTAIN  (best guess: {result.label.upper()}, {result.confidence*100:.1f}%)"
+        else:
+            color = "#2ecc71" if result.label == "good" else "#e74c3c"
+            display_text = f"Result: {result.label.upper()}  ({result.confidence*100:.1f}%)"
+        self.result_label.setText(display_text)
         self.result_label.setStyleSheet(f"font-size:16px; font-weight:bold; padding:8px; color:{color};")
         self.latency_label.setText(f"Latency: {result.latency_ms:.1f} ms  [{result.backend.upper()}]")
+ 
  
     def _run_benchmark(self):
         if self.current_frame is None:
@@ -428,6 +490,76 @@ class SmartQCWindow(QMainWindow):
             )
         except Exception as e:
             self.explain_status.setText(f"Could not generate heatmap: {e}")
+ 
+    # -- Batch inspection -----------------------------------------------
+ 
+    def _run_batch_inspection(self):
+        folder = QFileDialog.getExistingDirectory(self, "Select folder of images to inspect")
+        if not folder:
+            return
+ 
+        folder_path = Path(folder)
+        image_exts = {".png", ".jpg", ".jpeg", ".bmp"}
+        image_paths = sorted(
+            p for p in folder_path.iterdir() if p.suffix.lower() in image_exts
+        )
+ 
+        if not image_paths:
+            self.batch_summary_label.setText("No images found in that folder.")
+            return
+ 
+        threshold = self.threshold_slider.value() / 100.0
+        results = []
+        good_count = defective_count = uncertain_count = 0
+ 
+        for path in image_paths:
+            frame = cv2.imread(str(path))
+            if frame is None:
+                continue
+            result = self.engine.predict(frame, backend="cpu")
+            if result.confidence < threshold:
+                display_label = "UNCERTAIN"
+                uncertain_count += 1
+            elif result.label == "good":
+                display_label = "GOOD"
+                good_count += 1
+            else:
+                display_label = "DEFECTIVE"
+                defective_count += 1
+            results.append((path.name, display_label, result.confidence, result.latency_ms))
+ 
+        self._batch_results = results
+        self.batch_summary_label.setText(
+            f"{len(results)} images inspected — {good_count} good, "
+            f"{defective_count} defective, {uncertain_count} uncertain."
+        )
+ 
+        self.batch_table.setRowCount(len(results))
+        for row, (name, label, conf, latency) in enumerate(results):
+            self.batch_table.setItem(row, 0, QTableWidgetItem(name))
+            self.batch_table.setItem(row, 1, QTableWidgetItem(label))
+            self.batch_table.setItem(row, 2, QTableWidgetItem(f"{conf*100:.1f}%"))
+            self.batch_table.setItem(row, 3, QTableWidgetItem(f"{latency:.1f}"))
+ 
+        self.batch_export_btn.setEnabled(bool(results))
+ 
+    def _export_batch_csv(self):
+        if not self._batch_results:
+            return
+        save_path, _ = QFileDialog.getSaveFileName(
+            self, "Save batch results as CSV", "smartqc_batch_results.csv", "CSV Files (*.csv)"
+        )
+        if not save_path:
+            return
+        import csv
+        with open(save_path, "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["file", "result", "confidence", "latency_ms"])
+            for name, label, conf, latency in self._batch_results:
+                writer.writerow([name, label, f"{conf*100:.1f}%", f"{latency:.1f}"])
+        self.batch_summary_label.setText(
+            self.batch_summary_label.text() + f"  (saved to {Path(save_path).name})"
+        )
  
     # -- History / trend -----------------------------------------------
  

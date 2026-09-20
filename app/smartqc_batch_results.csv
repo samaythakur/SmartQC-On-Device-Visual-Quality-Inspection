@@ -1,0 +1,353 @@
+file,result,confidence,latency_ms
+download (1).jpeg,DEFECTIVE,89.4%,10.7
+download (10).jpeg,DEFECTIVE,99.8%,7.0
+download (11).jpeg,UNCERTAIN,68.6%,6.7
+download (12).jpeg,DEFECTIVE,99.9%,5.0
+download (13).jpeg,DEFECTIVE,99.9%,4.5
+download (14).jpeg,DEFECTIVE,100.0%,4.6
+download (15).jpeg,DEFECTIVE,99.7%,4.4
+download (16).jpeg,DEFECTIVE,100.0%,6.0
+download (17).jpeg,DEFECTIVE,96.7%,5.9
+download (18).jpeg,DEFECTIVE,100.0%,5.3
+download (19).jpeg,DEFECTIVE,99.6%,4.3
+download (2).jpeg,DEFECTIVE,99.9%,6.7
+download (20).jpeg,DEFECTIVE,99.9%,6.7
+download (21).jpeg,DEFECTIVE,100.0%,4.6
+download (22).jpeg,DEFECTIVE,100.0%,4.4
+download (23).jpeg,DEFECTIVE,100.0%,4.4
+download (24).jpeg,DEFECTIVE,99.9%,6.8
+download (25).jpeg,DEFECTIVE,100.0%,6.6
+download (26).jpeg,DEFECTIVE,99.6%,4.5
+download (27).jpeg,DEFECTIVE,100.0%,4.3
+download (28).jpeg,DEFECTIVE,99.9%,4.2
+download (29).jpeg,DEFECTIVE,99.9%,4.4
+download (3).jpeg,DEFECTIVE,99.9%,6.5
+download (30).jpeg,DEFECTIVE,100.0%,4.6
+download (31).jpeg,DEFECTIVE,98.8%,6.6
+download (32).jpeg,DEFECTIVE,99.8%,4.4
+download (33).jpeg,DEFECTIVE,75.4%,6.5
+download (34).jpeg,DEFECTIVE,98.9%,4.5
+download (35).jpeg,DEFECTIVE,97.6%,4.7
+download (36).jpeg,DEFECTIVE,99.7%,4.5
+download (37).jpeg,DEFECTIVE,99.8%,4.5
+download (38).jpeg,UNCERTAIN,60.5%,4.3
+download (39).jpeg,DEFECTIVE,99.3%,4.3
+download (4).jpeg,DEFECTIVE,99.8%,4.2
+download (40).jpeg,DEFECTIVE,99.6%,4.9
+download (41).jpeg,DEFECTIVE,98.5%,4.2
+download (42).jpeg,DEFECTIVE,100.0%,4.6
+download (5).jpeg,DEFECTIVE,99.4%,4.0
+download (6).jpeg,DEFECTIVE,98.4%,4.2
+download (7).jpeg,DEFECTIVE,100.0%,4.8
+download (8).jpeg,DEFECTIVE,99.9%,4.5
+download (9).jpeg,DEFECTIVE,100.0%,4.5
+download.jpeg,DEFECTIVE,99.7%,4.5
+images (1).jpeg,DEFECTIVE,100.0%,4.5
+images (10).jpeg,DEFECTIVE,90.7%,4.5
+images (100).jpeg,DEFECTIVE,100.0%,4.4
+images (11).jpeg,DEFECTIVE,99.9%,6.4
+images (12).jpeg,DEFECTIVE,98.4%,4.5
+images (13).jpeg,GOOD,98.2%,4.3
+images (14).jpeg,DEFECTIVE,99.7%,4.2
+images (15).jpeg,DEFECTIVE,100.0%,4.2
+images (16).jpeg,DEFECTIVE,99.9%,4.7
+images (17).jpeg,DEFECTIVE,99.7%,4.5
+images (18).jpeg,DEFECTIVE,99.5%,4.5
+images (19).jpeg,DEFECTIVE,100.0%,5.1
+images (2).jpeg,DEFECTIVE,99.7%,4.5
+images (20).jpeg,DEFECTIVE,100.0%,4.2
+images (21).jpeg,DEFECTIVE,99.9%,4.5
+images (22).jpeg,DEFECTIVE,99.9%,4.9
+images (23).jpeg,DEFECTIVE,91.9%,4.3
+images (24).jpeg,DEFECTIVE,100.0%,4.2
+images (25).jpeg,DEFECTIVE,100.0%,4.9
+images (26).jpeg,DEFECTIVE,97.2%,5.0
+images (27).jpeg,DEFECTIVE,99.6%,4.4
+images (28).jpeg,UNCERTAIN,58.3%,4.2
+images (29).jpeg,DEFECTIVE,100.0%,4.8
+images (3).jpeg,DEFECTIVE,100.0%,5.2
+images (30).jpeg,DEFECTIVE,99.9%,5.2
+images (31).jpeg,DEFECTIVE,99.9%,4.7
+images (32).jpeg,DEFECTIVE,78.4%,4.8
+images (33).jpeg,DEFECTIVE,100.0%,5.3
+images (34).jpeg,DEFECTIVE,100.0%,5.2
+images (35).jpeg,DEFECTIVE,99.0%,5.3
+images (36).jpeg,DEFECTIVE,100.0%,5.2
+images (37).jpeg,DEFECTIVE,99.7%,4.6
+images (38).jpeg,DEFECTIVE,90.0%,4.6
+images (39).jpeg,DEFECTIVE,82.8%,5.4
+images (4).jpeg,DEFECTIVE,99.6%,4.3
+images (40).jpeg,GOOD,84.9%,4.5
+images (41).jpeg,DEFECTIVE,100.0%,4.7
+images (42).jpeg,DEFECTIVE,100.0%,4.4
+images (43).jpeg,DEFECTIVE,99.9%,4.2
+images (44).jpeg,GOOD,70.8%,5.1
+images (45).jpeg,DEFECTIVE,87.0%,4.7
+images (46).jpeg,DEFECTIVE,100.0%,4.9
+images (47).jpeg,DEFECTIVE,100.0%,4.3
+images (48).jpeg,DEFECTIVE,100.0%,4.2
+images (49).jpeg,DEFECTIVE,100.0%,4.4
+images (5).jpeg,DEFECTIVE,98.5%,4.5
+images (50).jpeg,DEFECTIVE,100.0%,4.2
+images (51).jpeg,DEFECTIVE,100.0%,4.2
+images (52).jpeg,DEFECTIVE,99.6%,4.6
+images (53).jpeg,DEFECTIVE,100.0%,4.2
+images (54).jpeg,DEFECTIVE,99.8%,4.6
+images (55).jpeg,DEFECTIVE,100.0%,4.3
+images (56).jpeg,DEFECTIVE,97.3%,4.9
+images (57).jpeg,DEFECTIVE,99.8%,4.3
+images (58).jpeg,DEFECTIVE,99.7%,4.3
+images (59).jpeg,DEFECTIVE,100.0%,4.7
+images (6).jpeg,DEFECTIVE,98.9%,4.6
+images (60).jpeg,DEFECTIVE,99.2%,4.3
+images (61).jpeg,DEFECTIVE,100.0%,4.4
+images (62).jpeg,DEFECTIVE,99.9%,4.4
+images (63).jpeg,DEFECTIVE,100.0%,4.3
+images (64).jpeg,DEFECTIVE,96.8%,4.3
+images (65).jpeg,DEFECTIVE,99.9%,4.4
+images (66).jpeg,DEFECTIVE,83.2%,4.3
+images (67).jpeg,DEFECTIVE,99.4%,4.2
+images (68).jpeg,DEFECTIVE,100.0%,4.8
+images (69).jpeg,DEFECTIVE,99.9%,5.0
+images (7).jpeg,DEFECTIVE,100.0%,4.8
+images (70).jpeg,DEFECTIVE,99.2%,4.9
+images (71).jpeg,DEFECTIVE,100.0%,6.5
+images (72).jpeg,DEFECTIVE,100.0%,6.4
+images (73).jpeg,DEFECTIVE,94.1%,6.3
+images (74).jpeg,DEFECTIVE,99.4%,6.3
+images (75).jpeg,DEFECTIVE,99.9%,4.1
+images (76).jpeg,DEFECTIVE,100.0%,4.2
+images (77).jpeg,DEFECTIVE,72.3%,4.1
+images (78).jpeg,DEFECTIVE,99.6%,4.5
+images (79).jpeg,DEFECTIVE,100.0%,4.5
+images (8).jpeg,DEFECTIVE,99.9%,4.5
+images (80).jpeg,DEFECTIVE,98.9%,4.4
+images (81).jpeg,DEFECTIVE,99.8%,4.3
+images (82).jpeg,UNCERTAIN,57.6%,4.4
+images (83).jpeg,DEFECTIVE,100.0%,4.1
+images (84).jpeg,DEFECTIVE,100.0%,4.3
+images (85).jpeg,DEFECTIVE,100.0%,4.3
+images (86).jpeg,DEFECTIVE,100.0%,4.4
+images (87).jpeg,DEFECTIVE,100.0%,4.4
+images (88).jpeg,DEFECTIVE,100.0%,4.5
+images (89).jpeg,DEFECTIVE,100.0%,4.5
+images (9).jpeg,DEFECTIVE,100.0%,4.3
+images (90).jpeg,DEFECTIVE,100.0%,4.4
+images (91).jpeg,DEFECTIVE,100.0%,4.3
+images (92).jpeg,DEFECTIVE,98.9%,4.2
+images (93).jpeg,DEFECTIVE,99.0%,4.2
+images (94).jpeg,DEFECTIVE,96.5%,4.4
+images (95).jpeg,DEFECTIVE,100.0%,4.4
+images (96).jpeg,DEFECTIVE,99.9%,4.3
+images (97).jpeg,DEFECTIVE,99.4%,4.5
+images (98).jpeg,DEFECTIVE,100.0%,4.4
+images (99).jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T130420.366.jpeg,DEFECTIVE,99.9%,4.5
+images - 2026-05-08T130427.105.jpeg,DEFECTIVE,94.1%,4.4
+images - 2026-05-08T130434.874.jpeg,DEFECTIVE,99.9%,4.4
+images - 2026-05-08T130440.838.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T130450.445.jpeg,DEFECTIVE,99.9%,4.3
+images - 2026-05-08T130459.514.jpeg,DEFECTIVE,99.0%,4.3
+images - 2026-05-08T130507.668.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T130513.714.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T130519.933.jpeg,DEFECTIVE,100.0%,6.3
+images - 2026-05-08T130527.271.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T130534.974.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T130543.109.jpeg,DEFECTIVE,96.8%,4.5
+images - 2026-05-08T130549.673.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T130558.520.jpeg,DEFECTIVE,100.0%,4.9
+images - 2026-05-08T130606.159.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T130612.879.jpeg,DEFECTIVE,99.0%,4.5
+images - 2026-05-08T130627.135.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T130639.594.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T130652.346.jpeg,DEFECTIVE,99.9%,4.7
+images - 2026-05-08T130702.831.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T130710.654.jpeg,DEFECTIVE,79.6%,4.6
+images - 2026-05-08T130718.118.jpeg,DEFECTIVE,99.2%,4.7
+images - 2026-05-08T130737.984.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T130745.192.jpeg,DEFECTIVE,99.6%,4.6
+images - 2026-05-08T130756.596.jpeg,DEFECTIVE,99.5%,4.6
+images - 2026-05-08T130803.775.jpeg,DEFECTIVE,99.0%,4.5
+images - 2026-05-08T130811.744.jpeg,DEFECTIVE,99.9%,4.7
+images - 2026-05-08T130821.820.jpeg,DEFECTIVE,98.9%,4.6
+images - 2026-05-08T130828.548.jpeg,DEFECTIVE,99.8%,4.8
+images - 2026-05-08T130836.023.jpeg,DEFECTIVE,100.0%,4.8
+images - 2026-05-08T130844.712.jpeg,DEFECTIVE,99.4%,5.1
+images - 2026-05-08T130851.337.jpeg,DEFECTIVE,100.0%,5.0
+images - 2026-05-08T130900.837.jpeg,DEFECTIVE,99.8%,4.6
+images - 2026-05-08T130910.386.jpeg,DEFECTIVE,96.8%,4.5
+images - 2026-05-08T130917.374.jpeg,DEFECTIVE,99.7%,4.5
+images - 2026-05-08T130927.389.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T130937.547.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T130946.859.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T130957.912.jpeg,DEFECTIVE,99.3%,4.3
+images - 2026-05-08T131008.538.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T131016.259.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T131026.398.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T131033.074.jpeg,DEFECTIVE,97.6%,4.3
+images - 2026-05-08T131040.844.jpeg,DEFECTIVE,99.9%,4.6
+images - 2026-05-08T131048.078.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T131100.439.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T131108.361.jpeg,DEFECTIVE,99.4%,4.3
+images - 2026-05-08T131120.373.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T131129.117.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T131136.419.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T131143.552.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T131149.919.jpeg,DEFECTIVE,99.7%,4.1
+images - 2026-05-08T131156.632.jpeg,DEFECTIVE,99.9%,4.5
+images - 2026-05-08T131230.842.jpeg,DEFECTIVE,99.9%,4.2
+images - 2026-05-08T131238.666.jpeg,DEFECTIVE,100.0%,4.9
+images - 2026-05-08T131250.006.jpeg,DEFECTIVE,99.6%,4.4
+images - 2026-05-08T131259.504.jpeg,DEFECTIVE,99.8%,4.4
+images - 2026-05-08T131307.401.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T131317.596.jpeg,DEFECTIVE,100.0%,7.1
+images - 2026-05-08T131325.422.jpeg,DEFECTIVE,99.9%,5.4
+images - 2026-05-08T131336.890.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T131346.966.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T131539.489.jpeg,DEFECTIVE,100.0%,4.9
+images - 2026-05-08T131556.247.jpeg,DEFECTIVE,100.0%,4.8
+images - 2026-05-08T131602.813.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T131610.312.jpeg,DEFECTIVE,99.7%,4.8
+images - 2026-05-08T131617.740.jpeg,DEFECTIVE,99.8%,4.6
+images - 2026-05-08T131625.836.jpeg,DEFECTIVE,98.5%,4.5
+images - 2026-05-08T131632.322.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T131640.446.jpeg,DEFECTIVE,96.5%,4.5
+images - 2026-05-08T131648.994.jpeg,DEFECTIVE,100.0%,6.5
+images - 2026-05-08T131704.035.jpeg,DEFECTIVE,96.7%,4.6
+images - 2026-05-08T131711.756.jpeg,DEFECTIVE,99.7%,4.8
+images - 2026-05-08T131718.441.jpeg,DEFECTIVE,96.5%,4.5
+images - 2026-05-08T131725.670.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T131732.736.jpeg,DEFECTIVE,100.0%,5.1
+images - 2026-05-08T131742.870.jpeg,DEFECTIVE,99.1%,4.7
+images - 2026-05-08T131753.096.jpeg,DEFECTIVE,100.0%,4.8
+images - 2026-05-08T131800.280.jpeg,DEFECTIVE,99.3%,4.6
+images - 2026-05-08T131809.414.jpeg,DEFECTIVE,99.9%,4.5
+images - 2026-05-08T131815.716.jpeg,DEFECTIVE,99.9%,4.8
+images - 2026-05-08T131822.263.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T131829.628.jpeg,DEFECTIVE,96.8%,4.9
+images - 2026-05-08T131837.175.jpeg,DEFECTIVE,100.0%,6.3
+images - 2026-05-08T131843.650.jpeg,DEFECTIVE,99.5%,4.6
+images - 2026-05-08T131851.887.jpeg,DEFECTIVE,97.2%,4.4
+images - 2026-05-08T131858.283.jpeg,DEFECTIVE,99.9%,4.7
+images - 2026-05-08T131906.867.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T131920.632.jpeg,DEFECTIVE,99.5%,4.8
+images - 2026-05-08T131935.237.jpeg,DEFECTIVE,93.3%,4.5
+images - 2026-05-08T131946.716.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T131959.600.jpeg,DEFECTIVE,99.9%,4.5
+images - 2026-05-08T132015.218.jpeg,DEFECTIVE,99.6%,6.3
+images - 2026-05-08T132022.111.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132030.138.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T132037.689.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132046.583.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T132056.191.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132105.877.jpeg,DEFECTIVE,99.5%,4.6
+images - 2026-05-08T132113.640.jpeg,DEFECTIVE,97.0%,6.5
+images - 2026-05-08T132120.109.jpeg,DEFECTIVE,99.8%,6.5
+images - 2026-05-08T132126.040.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132134.251.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T132141.556.jpeg,DEFECTIVE,92.4%,4.9
+images - 2026-05-08T132150.743.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132157.193.jpeg,DEFECTIVE,99.4%,4.5
+images - 2026-05-08T132207.445.jpeg,DEFECTIVE,98.5%,4.5
+images - 2026-05-08T132450.302.jpeg,DEFECTIVE,98.9%,6.0
+images - 2026-05-08T132458.267.jpeg,DEFECTIVE,99.9%,5.2
+images - 2026-05-08T132504.659.jpeg,DEFECTIVE,96.9%,4.6
+images - 2026-05-08T132514.336.jpeg,DEFECTIVE,99.8%,5.0
+images - 2026-05-08T132521.935.jpeg,DEFECTIVE,99.9%,4.6
+images - 2026-05-08T132531.808.jpeg,UNCERTAIN,58.3%,4.4
+images - 2026-05-08T132541.554.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T132550.686.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T132559.371.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T132606.286.jpeg,DEFECTIVE,99.8%,4.6
+images - 2026-05-08T132614.185.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T132624.942.jpeg,DEFECTIVE,98.3%,4.7
+images - 2026-05-08T132638.858.jpeg,DEFECTIVE,99.4%,4.9
+images - 2026-05-08T132650.480.jpeg,DEFECTIVE,99.7%,4.6
+images - 2026-05-08T132659.452.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T132710.072.jpeg,DEFECTIVE,99.7%,5.0
+images - 2026-05-08T132717.847.jpeg,DEFECTIVE,99.2%,4.4
+images - 2026-05-08T132731.374.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T132739.548.jpeg,DEFECTIVE,100.0%,4.3
+images - 2026-05-08T132747.611.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T132755.514.jpeg,DEFECTIVE,99.0%,4.4
+images - 2026-05-08T132802.621.jpeg,DEFECTIVE,99.8%,4.7
+images - 2026-05-08T132810.768.jpeg,DEFECTIVE,100.0%,4.7
+images - 2026-05-08T132817.310.jpeg,DEFECTIVE,94.7%,4.6
+images - 2026-05-08T132826.875.jpeg,DEFECTIVE,100.0%,4.5
+images - 2026-05-08T132833.127.jpeg,DEFECTIVE,97.5%,4.6
+images - 2026-05-08T132840.954.jpeg,DEFECTIVE,97.2%,4.5
+images - 2026-05-08T132847.721.jpeg,DEFECTIVE,100.0%,4.6
+images - 2026-05-08T132859.184.jpeg,DEFECTIVE,90.7%,4.4
+images - 2026-05-08T132905.888.jpeg,DEFECTIVE,97.3%,4.6
+images - 2026-05-08T132923.488.jpeg,DEFECTIVE,92.2%,4.4
+images - 2026-05-08T132930.542.jpeg,DEFECTIVE,99.8%,4.5
+images - 2026-05-08T132940.671.jpeg,DEFECTIVE,100.0%,4.4
+images - 2026-05-08T132952.159.jpeg,DEFECTIVE,89.0%,4.4
+images - 2026-05-08T133002.324.jpeg,DEFECTIVE,99.0%,4.4
+images - 2026-05-08T133012.431.jpeg,DEFECTIVE,71.1%,4.5
+images - 2026-05-08T133022.594.jpeg,UNCERTAIN,69.9%,4.4
+images.jpeg,DEFECTIVE,100.0%,4.6
+moldy_bread (1).jpeg,DEFECTIVE,73.4%,4.3
+moldy_bread (1).jpg,DEFECTIVE,99.8%,4.5
+moldy_bread (1).png,DEFECTIVE,83.7%,4.7
+moldy_bread (10).jpg,DEFECTIVE,99.5%,4.4
+moldy_bread (11).jpg,DEFECTIVE,100.0%,4.7
+moldy_bread (12).jpg,DEFECTIVE,100.0%,4.5
+moldy_bread (13).jpg,DEFECTIVE,97.5%,4.5
+moldy_bread (14).jpg,DEFECTIVE,98.9%,4.5
+moldy_bread (15).jpg,DEFECTIVE,99.7%,4.4
+moldy_bread (16).jpg,DEFECTIVE,98.9%,4.5
+moldy_bread (17).jpg,DEFECTIVE,91.9%,4.4
+moldy_bread (18).jpg,DEFECTIVE,97.3%,4.3
+moldy_bread (19).jpg,DEFECTIVE,98.2%,4.5
+moldy_bread (2).jpeg,DEFECTIVE,97.2%,4.6
+moldy_bread (2).jpg,DEFECTIVE,95.3%,4.7
+moldy_bread (2).png,DEFECTIVE,99.5%,4.6
+moldy_bread (20).jpg,DEFECTIVE,99.8%,4.4
+moldy_bread (21).jpg,DEFECTIVE,100.0%,4.5
+moldy_bread (22).jpg,DEFECTIVE,96.5%,4.5
+moldy_bread (23).jpg,DEFECTIVE,98.4%,4.7
+moldy_bread (24).jpg,DEFECTIVE,100.0%,4.5
+moldy_bread (25).jpg,DEFECTIVE,99.4%,4.5
+moldy_bread (26).jpg,DEFECTIVE,99.6%,4.6
+moldy_bread (27).jpg,DEFECTIVE,99.8%,4.7
+moldy_bread (28).jpg,DEFECTIVE,99.7%,5.1
+moldy_bread (29).jpg,DEFECTIVE,99.8%,4.4
+moldy_bread (3) .jpeg,DEFECTIVE,99.6%,4.9
+moldy_bread (3).jpg,DEFECTIVE,99.9%,4.7
+moldy_bread (3).png,DEFECTIVE,99.0%,4.7
+moldy_bread (30).jpg,DEFECTIVE,97.5%,5.0
+moldy_bread (31).jpg,DEFECTIVE,99.1%,5.2
+moldy_bread (32).jpg,DEFECTIVE,99.7%,4.5
+moldy_bread (33).jpg,DEFECTIVE,99.6%,4.9
+moldy_bread (34).jpg,DEFECTIVE,100.0%,4.6
+moldy_bread (35).jpg,DEFECTIVE,99.9%,4.5
+moldy_bread (36).jpg,DEFECTIVE,99.8%,4.9
+moldy_bread (37).jpg,DEFECTIVE,99.7%,4.6
+moldy_bread (38).jpg,DEFECTIVE,99.8%,4.3
+moldy_bread (39).jpg,DEFECTIVE,99.5%,4.5
+moldy_bread (4).jpeg,DEFECTIVE,99.3%,4.4
+moldy_bread (4).jpg,DEFECTIVE,99.9%,5.2
+moldy_bread (4).png,DEFECTIVE,100.0%,4.6
+moldy_bread (40).jpg,DEFECTIVE,99.8%,4.6
+moldy_bread (41).jpg,DEFECTIVE,99.8%,4.4
+moldy_bread (42).jpg,DEFECTIVE,99.8%,4.5
+moldy_bread (43).jpg,DEFECTIVE,100.0%,4.3
+moldy_bread (44).jpg,DEFECTIVE,100.0%,4.5
+moldy_bread (45).jpg,DEFECTIVE,99.0%,4.5
+moldy_bread (46).jpg,DEFECTIVE,99.9%,4.9
+moldy_bread (47).jpg,DEFECTIVE,99.9%,5.3
+moldy_bread (48).jpg,DEFECTIVE,99.7%,4.6
+moldy_bread (49).jpg,DEFECTIVE,100.0%,4.7
+moldy_bread (5).jpeg,DEFECTIVE,100.0%,4.6
+moldy_bread (5).jpg,DEFECTIVE,100.0%,4.8
+moldy_bread (5).png,DEFECTIVE,99.9%,4.6
+moldy_bread (50).jpg,DEFECTIVE,99.9%,4.5
+moldy_bread (51).jpg,DEFECTIVE,99.5%,4.5
+moldy_bread (6).jpeg,DEFECTIVE,100.0%,4.5
+moldy_bread (6).jpg,DEFECTIVE,99.8%,4.5
+moldy_bread (7).jpeg,DEFECTIVE,99.7%,4.5
+moldy_bread (8).jpg,DEFECTIVE,99.6%,4.7
+moldy_bread (9).jpg,DEFECTIVE,98.5%,4.5
+moldy_bread.jpeg,DEFECTIVE,99.5%,4.7
+WhatsApp Image 2026-05-05 at 1.23.14 PM.jpeg,DEFECTIVE,99.9%,4.2

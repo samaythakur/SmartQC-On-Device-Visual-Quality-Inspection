@@ -116,3 +116,29 @@ Full step-by-step instructions and the complete source code of every script are 
 
 See the [Project Report](./SmartQC_Project_Report.pdf) for full details, evaluation methodology, and future work.
 
+Explanation-
+1. The problem (why this project exists)
+"I built SmartQC, an on-device visual quality inspection tool. The idea started from a problem I'd seen before — small food producers and workshops can't afford industrial inspection hardware, but the alternative, cloud-based AI inspection, has real downsides: latency, ongoing cost per scan, and sending production images off-site. So I set out to build something that ran entirely on-device, on hardware a small business might already own."
+
+2. Building and validating the model
+"I trained an image classifier — MobileNetV2 — on a labeled dataset of good and defective bread samples, using transfer learning so I didn't need to train from scratch. It reached 99.2% validation accuracy. But I didn't stop at accuracy — I ran a full evaluation: confusion matrix, precision, recall, and ROC-AUC, which came out to 0.9997. That mattered to me because accuracy alone can hide problems, like a model that's great on one class and bad on the other."
+
+3. Making it deployment-ready
+"Since the challenge was built around Qualcomm's Snapdragon platform, I exported the model to ONNX and ran it through Qualcomm AI Hub, their cloud compilation service, to optimize it specifically for the Snapdragon X Elite chip. That gave me a genuinely deployment-ready model — not just a model that works in a notebook, but one compiled for real target hardware."
+
+4. Turning results into product decisions
+"Then I built an actual desktop app around it, and I made some deliberate product decisions here, not just engineering ones. For example, I added a confidence-threshold feature — if the model isn't confident, instead of forcing a guess, it flags the result as uncertain for manual review. I added that specifically after testing the model against a larger, messier batch of 352 real-world images and seeing it get a few genuinely ambiguous cases wrong — so I used that evaluation data to decide what feature to build next, rather than guessing."
+
+5. Building for the real user, not just the demo
+"I also added Grad-CAM explainability — a heatmap that shows which part of the image the model actually looked at — because for something like quality inspection, an operator won't trust a black-box yes/no answer. Being able to see 'here's the mold it detected' builds real trust in the tool. And I added batch processing with CSV export, because a real inspection workflow isn't one image at a time — someone would want to run a whole folder and get a report."
+
+6. Results
+"On the real-world batch test — 352 images the model hadn't seen — it got 97.4% right, correctly flagged the ambiguous ones instead of guessing wrong, and that gave me confidence the system would hold up outside a clean lab dataset."
+
+7. The honest limitation
+"I also want to be upfront about a limitation — I didn't have access to physical Snapdragon hardware, so while the model is genuinely compiled and validated for the Snapdragon NPU through Qualcomm's own tooling, I tested the live application on CPU. I documented that clearly in my report rather than overstating it. I think being precise about what's proven versus what's the next step is part of doing this properly."
+
+8. Conclusion
+"So end to end: I went from identifying a real gap — affordable, private, on-device inspection — to a trained and rigorously evaluated model, to a deployment-optimized build, to an actual usable application with features driven by what the evaluation data told me op
+
+

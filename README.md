@@ -1,4 +1,4 @@
-# SmartQC — On-Device Visual Quality Inspection (Snapdragon)
+# SmartQC: On-Device Visual Quality Inspection (Snapdragon)
 
 A Windows desktop app that classifies product quality/defects from a webcam
 or uploaded image, running inference locally on the Snapdragon NPU via

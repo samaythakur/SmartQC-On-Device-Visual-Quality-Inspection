@@ -1,4 +1,4 @@
-# SmartQC: On-Device Visual Quality Inspection (Snapdragon)
+# SmartQC: On-Device Visual Quality Inspection (Snapdragon® AI Lab Build & Present Challenge)
 
 A Windows desktop app that classifies product quality/defects from a webcam
 or uploaded image, running inference locally on the Snapdragon NPU via

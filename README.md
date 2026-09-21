@@ -1,4 +1,5 @@
-# SmartQC: On-Device Visual Quality Inspection (Qualcomm | Snapdragon® AI Lab Build & Present Challenge)
+# SmartQC: On-Device Visual Quality Inspection 
+(Qualcomm | Snapdragon® AI Lab Build & Present Challenge)
 
 SmartQC is a Windows desktop application that inspects product quality from a webcam feed or uploaded image, entirely on-device — no cloud calls, no internet dependency at inference time. The model was trained, evaluated, and compiled/optimized for the **Snapdragon X Elite** using **Qualcomm AI Hub**.
 

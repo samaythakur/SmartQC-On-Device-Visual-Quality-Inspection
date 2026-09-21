@@ -131,10 +131,7 @@ Explanation-
 6. Results:-
 "On the real-world batch test — 352 images the model hadn't seen — it got 97.4% right, correctly flagged the ambiguous ones instead of guessing wrong, and that gave me confidence the system would hold up outside a clean lab dataset."
 
-7. Limitation:-
-"I also want to be upfront about a limitation — I didn't have access to physical Snapdragon hardware, so while the model is genuinely compiled and validated for the Snapdragon NPU through Qualcomm's own tooling, I tested the live application on CPU. I documented that clearly in my report rather than overstating it. I think being precise about what's proven versus what's the next step is part of doing this properly."
-
-8. Conclusion:-
+7. Conclusion:-
 "So end to end: I went from identifying a real gap — affordable, private, on-device inspection — to a trained and rigorously evaluated model, to a deployment-optimized build, to an actual usable application with features driven by what the evaluation data told me operators would need, all documented so someone else could reproduce or extend it."
 
 

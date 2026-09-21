@@ -139,6 +139,6 @@ Explanation-
 "I also want to be upfront about a limitation — I didn't have access to physical Snapdragon hardware, so while the model is genuinely compiled and validated for the Snapdragon NPU through Qualcomm's own tooling, I tested the live application on CPU. I documented that clearly in my report rather than overstating it. I think being precise about what's proven versus what's the next step is part of doing this properly."
 
 8. Conclusion:-
-"So end to end: I went from identifying a real gap — affordable, private, on-device inspection — to a trained and rigorously evaluated model, to a deployment-optimized build, to an actual usable application with features driven by what the evaluation data told me op
+"So end to end: I went from identifying a real gap — affordable, private, on-device inspection — to a trained and rigorously evaluated model, to a deployment-optimized build, to an actual usable application with features driven by what the evaluation data told me operators would need, all documented so someone else could reproduce or extend it."
 
 

@@ -120,7 +120,7 @@ Explanation-
 "I trained an image classifier — MobileNetV2 — on a labeled dataset of good and defective bread samples, using transfer learning so I didn't need to train from scratch. It reached 99.2% validation accuracy. But I didn't stop at accuracy — I ran a full evaluation: confusion matrix, precision, recall, and ROC-AUC, which came out to 0.9997. That mattered to me because accuracy alone can hide problems, like a model that's great on one class and bad on the other."
 
 3. Making it deployment-ready:-
-"Since the challenge was built around Qualcomm's Snapdragon platform, I exported the model to ONNX and ran it through Qualcomm AI Hub, their cloud compilation service, to optimize it specifically for the Snapdragon X Elite chip. That gave me a genuinely deployment-ready model — not just a model that works in a notebook, but one compiled for real target hardware."
+"I exported the model to ONNX and ran it through Qualcomm AI Hub, their cloud compilation service, to optimize it specifically for the Snapdragon X Elite chip. That gave me a genuinely deployment-ready model — not just a model that works in a notebook, but one compiled for real target hardware."
 
 4. Turning results into product decisions:-
 "Then I built an actual desktop app around it, and I made some deliberate product decisions here, not just engineering ones. For example, I added a confidence-threshold feature — if the model isn't confident, instead of forcing a guess, it flags the result as uncertain for manual review. I added that specifically after testing the model against a larger, messier batch of 352 real-world images and seeing it get a few genuinely ambiguous cases wrong — so I used that evaluation data to decide what feature to build next, rather than guessing."

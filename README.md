@@ -50,10 +50,6 @@ Webcam / Image Upload
 - **Storage:** SQLite
 - **Evaluation:** scikit-learn, matplotlib
 
-## Project Origin
-
-SmartQC extends an earlier embedded-systems project — an AI-based bread quality indicator using an ESP32-CAM and a MobileNetV2 classifier — retargeted from a microcontroller pipeline into a fully software-based Windows application, explicitly optimized for Snapdragon-powered laptops.
-
 ## Run It
 
 Run these from the **project root** (the top-level folder containing `app/`, `train.py`, etc.) — not from inside `app/`:

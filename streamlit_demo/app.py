@@ -29,8 +29,12 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 from torchvision import models
+import os
 
-WEIGHTS_PATH = Path("smartqc_weights.pt")
+WEIGHTS_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "smartqc_weights.pt"
+)
 IMG_SIZE = 224
 
 st.set_page_config(page_title="SmartQC — Visual Quality Inspection", page_icon="🍞", layout="wide")

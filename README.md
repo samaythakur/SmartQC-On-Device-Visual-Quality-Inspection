@@ -137,9 +137,9 @@ Explanation-
 
 8. Deployment:-Why two versions — desktop app and web demo?
 
-1. **Different category of software** — The desktop app is a native Windows application (PyQt5), not a website. Web hosting platforms like Vercel or Streamlit Cloud only host browser-based content, so there's no way to deploy a native desktop app there — it's not a compatibility issue, it's a fundamentally different type of software (installed, OS-level programs like VS Code or Photoshop, vs. browser-based software like Gmail).
+ **Different category of software** — The desktop app is a native Windows application (PyQt5), not a website. Web hosting platforms like Vercel or Streamlit Cloud only host browser-based content, so there's no way to deploy a native desktop app there — it's not a compatibility issue, it's a fundamentally different type of software (installed, OS-level programs like VS Code or Photoshop, vs. browser-based software like Gmail).
 
-2. **Built a separate web version for accessibility** — To give people a link they could try without installing anything, I built a second, lightweight version using Streamlit, which is browser-based and can be hosted online.
+**Built a separate web version for accessibility** — To give people a link they could try without installing anything, I built a second, lightweight version using Streamlit, which is browser-based and can be hosted online.
 
-3. **Same model, different deployment story** — The web version reuses the same trained model, but runs on standard cloud CPU, not the Snapdragon NPU pipeline. The web demo is for showing the model's behavior; the actual on-device, Snapdragon-optimized deployment story is the desktop app plus the Qualcomm AI Hub compilation.
+**Same model, different deployment story** — The web version reuses the same trained model, but runs on standard cloud CPU, not the Snapdragon NPU pipeline. The web demo is for showing the model's behavior; the actual on-device, Snapdragon-optimized deployment story is the desktop app plus the Qualcomm AI Hub compilation.
 

@@ -229,7 +229,7 @@ def predict_with_gradcam(
 # ---------------------------------------------------------------------------
 
 st.title(
-    "🍞 SmartQC — On-Device Visual Quality Inspection"
+    "SmartQC: On-Device Visual Quality Inspection"
 )
 
 st.markdown(
@@ -369,6 +369,6 @@ with col2:
 st.divider()
 
 st.caption(
-    "Built by Samay Thakur — Electronics & Instrumentation Engineering, "
+    "Built by Samay Thakur - Electronics & Instrumentation Engineering, "
     "M.S. Ramaiah Institute of Technology, Bengaluru, India"
 )

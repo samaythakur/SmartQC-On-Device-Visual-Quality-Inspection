@@ -3,7 +3,7 @@
 
 SmartQC is a Windows desktop application that inspects product quality from a webcam feed or uploaded image, entirely on-device — no cloud calls, no internet dependency at inference time. The model was trained, evaluated, and compiled/optimized for the **Snapdragon X Elite** using **Qualcomm AI Hub**.
 
-📄 [Project Report](./SmartQC_Project_Report.pdf) · 🎞️ [Pitch Deck (PDF)](./SmartQC_Pitch_Deck.pdf) · 📊 [Pitch Deck (PPTX)](./SmartQC_Pitch_Deck.pptx) · 🎥 [Demo Video](./SmartQC_Demo.mp4) · 🌐 [Live Web Demo](https://smartqc-on-device-visual-quality-inspection-6uxj2astrxavtfwgyy.streamlit.app/)
+📄 [Project Report](./SmartQC_Project_Report.pdf) · 🎞️ [Pitch Deck (PDF)](./SmartQC_Pitch_Deck.pdf) · 📊 [Pitch Deck (PPTX)](./SmartQC_Pitch_Deck.pptx) · 🎥 [Demo Video](./SmartQC_Demo.mp4) · 🌐 [Live Web Demo](https://smartqc-on-device-visual-quality-inspection.streamlit.app/)
 
 
 ---

@@ -562,7 +562,7 @@ st.markdown(
     <div class="smartqc-header">
 
     <div class="smartqc-title">
-    🍞 SmartQC — On-Device Visual Quality Inspection
+    SmartQC: On-Device Visual Quality Inspection
     </div>
 
     <div class="smartqc-subtitle">
@@ -1149,16 +1149,17 @@ with batch_tab:
         "Upload multiple product images and inspect them in one run."
     )
 
-    batch_files = st.file_uploader(
-        "Upload images",
-        type=[
-            "png",
-            "jpg",
-            "jpeg"
-        ],
-        accept_multiple_files=True,
-        key="batch_uploader"
-    )
+   batch_files = st.file_uploader(
+    "Select a folder containing inspection images",
+    type=[
+        "png",
+        "jpg",
+        "jpeg"
+    ],
+    accept_multiple_files="directory",
+    key="batch_uploader",
+    help="Select a folder. SmartQC will inspect all supported images inside it."
+  )
 
     batch_threshold = st.slider(
         "Batch confidence threshold (%)",

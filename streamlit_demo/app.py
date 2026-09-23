@@ -1403,7 +1403,7 @@ st.markdown(
     f"""
     <div class="footer">
 
-    <b>SmartQC</b> — On-Device Visual Quality Inspection<br>
+    <b>SmartQC:</b> On-Device Visual Quality Inspection<br>
 
     Built by Samay Thakur · Electronics & Instrumentation Engineering ·
     M.S. Ramaiah Institute of Technology, Bengaluru, India

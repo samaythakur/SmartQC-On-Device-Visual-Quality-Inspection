@@ -1,31 +1,11 @@
 """
 SmartQC — Streamlit Live Demo
+Compact UI version.
 
 Browser-based demonstration of SmartQC.
-
-Features:
-- Single-image inspection
-- Browser camera capture
-- Confidence thresholding
-- Good / Defective / Uncertain prediction
-- Confidence scores
-- Grad-CAM explainability
-- Current-session inspection history
-- Defect-rate trend
-- Batch inspection
-- CSV export
-
-IMPORTANT:
-This public web demo runs CPU inference on Streamlit Cloud.
-It does NOT execute inference on a Snapdragon NPU.
-
-The original SmartQC desktop application is the on-device deployment
-version designed for Snapdragon NPU execution using the Qualcomm AI
-Hub / QNN deployment path.
-
-Run locally:
-    pip install -r requirements.txt
-    streamlit run app.py
+The public web demo runs CPU inference on Streamlit Cloud.
+The original desktop application is designed for Snapdragon NPU
+deployment through the Qualcomm AI Hub / QNN path.
 """
 
 import os
@@ -42,13 +22,13 @@ from PIL import Image
 from torchvision import models
 
 
-# ============================================================================
-# CONFIGURATION
-# ============================================================================
+# =============================================================================
+# CONFIG
+# =============================================================================
 
 WEIGHTS_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    "smartqc_weights.pt"
+    "smartqc_weights.pt",
 )
 
 IMG_SIZE = 224
@@ -59,110 +39,154 @@ GITHUB_URL = (
 )
 
 
-# ============================================================================
-# PAGE CONFIGURATION
-# ============================================================================
+# =============================================================================
+# PAGE
+# =============================================================================
 
 st.set_page_config(
     page_title="SmartQC — Visual Quality Inspection",
+    page_icon="🍞",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed",
 )
 
 
-# ============================================================================
-# CUSTOM CSS
-# ============================================================================
+# =============================================================================
+# COMPACT UI
+# =============================================================================
 
 st.markdown(
     """
     <style>
-
-    /* Main page */
+    /* Overall spacing */
     .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        max-width: 1400px;
+        padding-top: 0.8rem;
+        padding-bottom: 0.4rem;
+    }
+
+    /* Reduce Streamlit vertical gaps */
+    div[data-testid="stVerticalBlock"] {
+        gap: 0.55rem;
+    }
+
+    div[data-testid="stHorizontalBlock"] {
+        gap: 1rem;
     }
 
     /* Header */
     .smartqc-header {
-        padding: 0.5rem 0 1rem 0;
+        padding: 0.1rem 0 0.35rem 0;
     }
 
     .smartqc-title {
-        font-size: 2.3rem;
-        font-weight: 700;
-        margin-bottom: 0.2rem;
+        font-size: 2.05rem;
+        line-height: 1.15;
+        font-weight: 750;
+        margin: 0;
     }
 
     .smartqc-subtitle {
-        font-size: 1rem;
-        opacity: 0.75;
-        margin-bottom: 1rem;
+        font-size: 0.92rem;
+        opacity: 0.68;
+        margin-top: 0.25rem;
+    }
+
+    /* Small status badge */
+    .status-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: -2.1rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.28rem 0.65rem;
+        border-radius: 999px;
+        background: rgba(76, 154, 255, 0.10);
+        border: 1px solid rgba(76, 154, 255, 0.30);
+        color: #79b8ff;
+        font-size: 0.78rem;
+        font-weight: 600;
+    }
+
+    /* Compact information strip */
+    .demo-strip {
+        padding: 0.55rem 0.8rem;
+        margin: 0.25rem 0 0.65rem 0;
+        border-left: 3px solid #4c9aff;
+        background: rgba(76, 154, 255, 0.07);
+        border-radius: 5px;
+        font-size: 0.82rem;
+        opacity: 0.9;
     }
 
     /* Result cards */
     .result-card {
-        padding: 1.2rem;
-        border-radius: 12px;
-        margin: 0.5rem 0 1rem 0;
+        padding: 0.8rem 0.9rem;
+        border-radius: 9px;
+        margin: 0.35rem 0 0.55rem 0;
         border: 1px solid rgba(128,128,128,0.25);
     }
 
+    .result-good {
+        background: rgba(40, 167, 69, 0.12);
+    }
+
+    .result-defective {
+        background: rgba(220, 53, 69, 0.13);
+    }
+
+    .result-uncertain {
+        background: rgba(255, 193, 7, 0.12);
+    }
+
     .result-label {
-        font-size: 1.7rem;
+        font-size: 1.25rem;
         font-weight: 700;
     }
 
     .result-confidence {
-        font-size: 1rem;
-        opacity: 0.8;
+        font-size: 0.82rem;
+        opacity: 0.75;
     }
 
-    /* Metric cards */
-    .metric-card {
-        padding: 1rem;
-        border-radius: 10px;
-        border: 1px solid rgba(128,128,128,0.25);
-        text-align: center;
+    /* Compact section headings */
+    h2, h3 {
+        margin-top: 0.35rem !important;
+        margin-bottom: 0.35rem !important;
     }
 
-    .metric-value {
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-
-    .metric-label {
-        font-size: 0.8rem;
-        opacity: 0.7;
-    }
-
-    /* Info box */
-    .demo-note {
-        padding: 0.8rem 1rem;
-        border-left: 4px solid #4c9aff;
-        background: rgba(76,154,255,0.08);
-        border-radius: 5px;
-        margin: 1rem 0;
-    }
-
-    /* Footer */
+    /* Compact footer */
     .footer {
         text-align: center;
-        opacity: 0.6;
-        padding-top: 2rem;
-        font-size: 0.85rem;
+        opacity: 0.48;
+        padding: 0.65rem 0 0.2rem 0;
+        font-size: 0.72rem;
     }
 
+    /* Make tab area compact */
+    button[data-baseweb="tab"] {
+        padding-top: 0.45rem;
+        padding-bottom: 0.45rem;
+    }
+
+    /* Hide unnecessary Streamlit menu text when possible */
+    footer {
+        visibility: hidden;
+        height: 0;
+    }
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 
-# ============================================================================
+# =============================================================================
 # SESSION STATE
-# ============================================================================
+# =============================================================================
 
 if "history" not in st.session_state:
     st.session_state.history = []
@@ -170,14 +194,16 @@ if "history" not in st.session_state:
 if "last_result" not in st.session_state:
     st.session_state.last_result = None
 
+if "batch_results" not in st.session_state:
+    st.session_state.batch_results = pd.DataFrame()
 
-# ============================================================================
-# MODEL LOADING
-# ============================================================================
+
+# =============================================================================
+# MODEL
+# =============================================================================
 
 @st.cache_resource
 def load_model():
-
     if not os.path.exists(WEIGHTS_PATH):
         raise FileNotFoundError(
             f"Model weights not found at: {WEIGHTS_PATH}"
@@ -185,22 +211,18 @@ def load_model():
 
     checkpoint = torch.load(
         WEIGHTS_PATH,
-        map_location="cpu"
+        map_location="cpu",
     )
 
     class_names = checkpoint["class_names"]
 
     model = models.mobilenet_v2()
-
     model.classifier[1] = torch.nn.Linear(
         model.last_channel,
-        len(class_names)
+        len(class_names),
     )
 
-    model.load_state_dict(
-        checkpoint["state_dict"]
-    )
-
+    model.load_state_dict(checkpoint["state_dict"])
     model.eval()
 
     return model, class_names
@@ -209,15 +231,11 @@ def load_model():
 model, CLASS_NAMES = load_model()
 
 
-# ============================================================================
-# HELPER FUNCTIONS
-# ============================================================================
+# =============================================================================
+# HELPERS
+# =============================================================================
 
 def clean_label(raw_label: str) -> str:
-    """
-    Convert dataset class names into user-facing labels.
-    """
-
     low = raw_label.lower()
 
     if "good" in low or "fresh" in low:
@@ -227,212 +245,124 @@ def clean_label(raw_label: str) -> str:
 
 
 def preprocess(image_rgb: np.ndarray) -> torch.Tensor:
-    """
-    Convert RGB image into MobileNetV2 input tensor.
-    """
-
     img = cv2.resize(
         image_rgb,
-        (IMG_SIZE, IMG_SIZE)
+        (IMG_SIZE, IMG_SIZE),
     )
 
-    img = img.astype(
-        np.float32
-    ) / 255.0
+    img = img.astype(np.float32) / 255.0
 
     mean = np.array(
         [0.485, 0.456, 0.406],
-        dtype=np.float32
+        dtype=np.float32,
     )
 
     std = np.array(
         [0.229, 0.224, 0.225],
-        dtype=np.float32
+        dtype=np.float32,
     )
 
-    img = (
-        img - mean
-    ) / std
-
-    img = np.transpose(
-        img,
-        (2, 0, 1)
-    )
-
-    img = img[None, ...].astype(
-        np.float32
-    )
+    img = (img - mean) / std
+    img = np.transpose(img, (2, 0, 1))
+    img = img[None, ...].astype(np.float32)
 
     return torch.from_numpy(img)
 
 
 def predict_image(image_rgb: np.ndarray):
-    """
-    Standard CPU prediction without Grad-CAM.
-
-    Used for batch inspection.
-    """
+    """CPU prediction used by batch inspection."""
 
     x = preprocess(image_rgb)
 
     start = time.perf_counter()
 
     with torch.no_grad():
-
         logits = model(x)
+        probs = F.softmax(logits, dim=1)[0]
 
-        probs = F.softmax(
-            logits,
-            dim=1
-        )[0]
+    latency_ms = (time.perf_counter() - start) * 1000.0
 
-    latency_ms = (
-        time.perf_counter() - start
-    ) * 1000.0
-
-    class_idx = int(
-        torch.argmax(probs).item()
-    )
-
-    confidence = float(
-        probs[class_idx].item()
-    )
-
-    label = clean_label(
-        CLASS_NAMES[class_idx]
-    )
+    class_idx = int(torch.argmax(probs).item())
+    confidence = float(probs[class_idx].item())
+    label = clean_label(CLASS_NAMES[class_idx])
 
     per_class = {
         clean_label(name): float(probs[i].item())
         for i, name in enumerate(CLASS_NAMES)
     }
 
-    return (
-        label,
-        confidence,
-        latency_ms,
-        per_class
-    )
+    return label, confidence, latency_ms, per_class
 
 
-def predict_with_gradcam(
-    image_rgb: np.ndarray
-):
-    """
-    Prediction + Grad-CAM.
-
-    Grad-CAM hooks are registered temporarily so that Streamlit reruns
-    do not accumulate duplicate hooks.
-    """
+def predict_with_gradcam(image_rgb: np.ndarray):
+    """Prediction + Grad-CAM for the latest inspection."""
 
     x = preprocess(image_rgb)
-
     target_layer = model.features[-1]
 
     state = {
         "activations": None,
-        "gradients": None
+        "gradients": None,
     }
 
-    def save_activation(
-        module,
-        input,
-        output
-    ):
+    def save_activation(module, inputs, output):
         state["activations"] = output.detach()
 
-    def save_gradient(
-        module,
-        grad_input,
-        grad_output
-    ):
+    def save_gradient(module, grad_input, grad_output):
         state["gradients"] = grad_output[0].detach()
 
     forward_handle = target_layer.register_forward_hook(
         save_activation
     )
-
     backward_handle = target_layer.register_full_backward_hook(
         save_gradient
     )
 
     try:
-
         start = time.perf_counter()
 
         model.zero_grad()
-
         logits = model(x)
+        probs = F.softmax(logits, dim=1)[0]
 
-        probs = F.softmax(
-            logits,
-            dim=1
-        )[0]
-
-        class_idx = int(
-            torch.argmax(probs).item()
-        )
-
-        confidence = float(
-            probs[class_idx].item()
-        )
+        class_idx = int(torch.argmax(probs).item())
+        confidence = float(probs[class_idx].item())
 
         logits[0, class_idx].backward()
 
-        latency_ms = (
-            time.perf_counter() - start
-        ) * 1000.0
+        latency_ms = (time.perf_counter() - start) * 1000.0
 
         activations = state["activations"][0]
-
         gradients = state["gradients"][0]
 
-        # Average gradients across spatial dimensions
-        weights = gradients.mean(
-            dim=(1, 2)
-        )
+        weights = gradients.mean(dim=(1, 2))
 
         cam = torch.zeros(
             activations.shape[1:],
-            dtype=torch.float32
+            dtype=torch.float32,
         )
 
         for channel, weight in enumerate(weights):
+            cam += weight * activations[channel]
 
-            cam += (
-                weight *
-                activations[channel]
-            )
-
-        cam = F.relu(
-            cam
-        ).numpy()
+        cam = F.relu(cam).numpy()
 
         if cam.max() > 0:
-
-            cam = (
-                cam /
-                cam.max()
-            )
+            cam = cam / cam.max()
 
         cam_resized = cv2.resize(
             cam,
-            (
-                image_rgb.shape[1],
-                image_rgb.shape[0]
-            )
+            (image_rgb.shape[1], image_rgb.shape[0]),
         )
 
         heatmap = cv2.applyColorMap(
-            np.uint8(
-                255 * cam_resized
-            ),
-            cv2.COLORMAP_JET
+            np.uint8(255 * cam_resized),
+            cv2.COLORMAP_JET,
         )
 
         heatmap_rgb = cv2.cvtColor(
             heatmap,
-            cv2.COLOR_BGR2RGB
+            cv2.COLOR_BGR2RGB,
         )
 
         overlay = cv2.addWeighted(
@@ -440,12 +370,10 @@ def predict_with_gradcam(
             0.60,
             heatmap_rgb,
             0.40,
-            0
+            0,
         )
 
-        label = clean_label(
-            CLASS_NAMES[class_idx]
-        )
+        label = clean_label(CLASS_NAMES[class_idx])
 
         per_class = {
             clean_label(name): float(probs[i].item())
@@ -458,11 +386,10 @@ def predict_with_gradcam(
             "latency_ms": latency_ms,
             "overlay": overlay,
             "per_class": per_class,
-            "class_idx": class_idx
+            "class_idx": class_idx,
         }
 
     finally:
-
         forward_handle.remove()
         backward_handle.remove()
 
@@ -472,43 +399,24 @@ def add_history(
     label,
     confidence,
     latency_ms,
-    uncertain
+    uncertain,
 ):
-    """
-    Add an inspection to the current browser session history.
-    """
-
-    if uncertain:
-        result = "Uncertain"
-    else:
-        result = label
-
-    entry = {
-        "Time": time.strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ),
-        "File": filename,
-        "Result": result,
-        "Confidence": round(
-            confidence * 100,
-            1
-        ),
-        "Latency (ms)": round(
-            latency_ms,
-            2
-        ),
-        "Backend": "CPU"
-    }
+    result = "Uncertain" if uncertain else label
 
     st.session_state.history.append(
-        entry
+        {
+            "Time": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "File": filename,
+            "Result": result,
+            "Confidence": round(confidence * 100, 1),
+            "Latency (ms)": round(latency_ms, 2),
+            "Backend": "CPU",
+        }
     )
 
 
 def history_dataframe():
-
     if not st.session_state.history:
-
         return pd.DataFrame(
             columns=[
                 "Time",
@@ -516,92 +424,95 @@ def history_dataframe():
                 "Result",
                 "Confidence",
                 "Latency (ms)",
-                "Backend"
+                "Backend",
             ]
         )
 
-    return pd.DataFrame(
-        st.session_state.history
-    )
+    return pd.DataFrame(st.session_state.history)
 
 
 def calculate_summary():
-
     df = history_dataframe()
 
     if df.empty:
-
         return {
             "total": 0,
             "good": 0,
             "defective": 0,
-            "uncertain": 0
+            "uncertain": 0,
         }
 
     return {
         "total": len(df),
-        "good": int(
-            (df["Result"] == "Good").sum()
-        ),
-        "defective": int(
-            (df["Result"] == "Defective").sum()
-        ),
-        "uncertain": int(
-            (df["Result"] == "Uncertain").sum()
-        )
+        "good": int((df["Result"] == "Good").sum()),
+        "defective": int((df["Result"] == "Defective").sum()),
+        "uncertain": int((df["Result"] == "Uncertain").sum()),
     }
 
 
-# ============================================================================
+def result_box(label, confidence, uncertain):
+    if uncertain:
+        css = "result-uncertain"
+        text = f"⚠️ UNCERTAIN · Best guess: {label}"
+    elif label == "Good":
+        css = "result-good"
+        text = "✓ GOOD"
+    else:
+        css = "result-defective"
+        text = "✕ DEFECTIVE"
+
+    st.markdown(
+        f"""
+        <div class="result-card {css}">
+            <div class="result-label">{text}</div>
+            <div class="result-confidence">
+                {confidence * 100:.1f}% confidence
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# =============================================================================
 # HEADER
-# ============================================================================
+# =============================================================================
 
 st.markdown(
     """
     <div class="smartqc-header">
-
-    <div class="smartqc-title">
-    SmartQC: On-Device Visual Quality Inspection
+        <div class="smartqc-title">
+            SmartQC: On-Device Visual Quality Inspection
+        </div>
+        <div class="smartqc-subtitle">
+            Computer vision quality inspection with edge AI.
+        </div>
     </div>
 
-    <div class="smartqc-subtitle">
-    Visual quality inspection using computer vision and edge AI.
+    <div class="status-row">
+        <span class="status-badge">● Web Demo · CPU</span>
     </div>
 
+    <div class="demo-strip">
+        <b>Web demo:</b> CPU inference on Streamlit servers.
+        The original desktop application is designed for Snapdragon
+        NPU deployment through the Qualcomm AI Hub / QNN path.
     </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 
-st.markdown(
-    f"""
-    <div class="demo-note">
-
-    <b>Live Web Demo:</b>
-    This browser demo runs standard <b>CPU inference</b> on Streamlit
-    servers. The original SmartQC desktop application is designed for
-    Snapdragon NPU deployment through the Qualcomm AI Hub / QNN path.
-
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-# ============================================================================
+# =============================================================================
 # SIDEBAR
-# ============================================================================
+# =============================================================================
 
 with st.sidebar:
-
     st.header("SmartQC")
 
     st.markdown(
         """
         **Visual Quality Inspection**
-
-        Classifies bread images as:
 
         - 🟢 Good
         - 🔴 Defective
@@ -612,8 +523,7 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Model")
-
-    st.write("Architecture: MobileNetV2")
+    st.write("MobileNetV2")
     st.write("Input: 224 × 224")
     st.write("Backend: CPU")
     st.write("Grad-CAM: Enabled")
@@ -621,350 +531,206 @@ with st.sidebar:
     st.divider()
 
     st.subheader("Model Results")
-
     st.write("Validation Accuracy: **99.2%**")
     st.write("ROC-AUC: **0.9997**")
     st.write("Real-world test: **97.4%**")
 
     st.divider()
 
-    st.markdown(
-        f"[View GitHub Repository]({GITHUB_URL})"
-    )
+    st.markdown(f"[📂 GitHub Repository]({GITHUB_URL})")
 
 
-# ============================================================================
+# =============================================================================
 # TABS
-# ============================================================================
+# =============================================================================
 
 (
     inspection_tab,
     history_tab,
     trend_tab,
     explainability_tab,
-    batch_tab
+    batch_tab,
 ) = st.tabs(
     [
-        "Inspection",
-        "History",
-        "Trend",
-        "Explainability",
-        "Batch Inspect"
+        "🔍 Inspection",
+        "📋 History",
+        "📈 Trend",
+        "🧠 Explainability",
+        "📦 Batch",
     ]
 )
 
 
-# ============================================================================
-# INSPECTION TAB
-# ============================================================================
+# =============================================================================
+# INSPECTION
+# =============================================================================
 
 with inspection_tab:
 
-    st.subheader("Inspection")
-
     input_source = st.radio(
         "Input source",
-        [
-            "Upload Image",
-            "Camera"
-        ],
-        horizontal=True
+        ["Upload Image", "Camera"],
+        horizontal=True,
     )
 
     uploaded_file = None
 
-    # ------------------------------------------------------------------------
-    # Upload image
-    # ------------------------------------------------------------------------
-
     if input_source == "Upload Image":
-
         uploaded_file = st.file_uploader(
             "Upload a bread image",
-            type=[
-                "png",
-                "jpg",
-                "jpeg"
-            ],
-            help="Upload a clear image of the product."
+            type=["png", "jpg", "jpeg"],
+            help="Upload a clear image of the product.",
         )
-
-    # ------------------------------------------------------------------------
-    # Camera
-    # ------------------------------------------------------------------------
-
     else:
-
-        uploaded_file = st.camera_input(
-            "Take a picture"
-        )
+        uploaded_file = st.camera_input("Take a picture")
 
     threshold = st.slider(
-        "Confidence threshold (%)",
+        "Confidence threshold",
         min_value=50,
         max_value=99,
         value=70,
-        step=1
-    )
-
-    st.caption(
-        "Predictions below this threshold are flagged as "
-        "**UNCERTAIN** instead of being forced into Good/Defective."
+        step=1,
     )
 
     if uploaded_file is not None:
 
-        image = Image.open(
-            uploaded_file
-        ).convert("RGB")
-
-        image_rgb = np.array(
-            image
-        )
-
-        st.divider()
+        image = Image.open(uploaded_file).convert("RGB")
+        image_rgb = np.array(image)
 
         left, right = st.columns(
-            [1.1, 1]
+            [1.15, 0.85],
+            gap="medium",
         )
 
-        # --------------------------------------------------------------------
-        # Image
-        # --------------------------------------------------------------------
-
         with left:
-
-            st.markdown(
-                "### Input Image"
-            )
+            st.markdown("### Input")
 
             st.image(
                 image_rgb,
                 caption="Inspection image",
-                width="stretch"
+                width="stretch",
             )
-
-        # --------------------------------------------------------------------
-        # Run inspection
-        # --------------------------------------------------------------------
 
         with right:
+            st.markdown("### Controls")
 
-            st.markdown(
-                "### Inspection Controls"
-            )
-
-            run_inspection = st.button(
+            if st.button(
                 "🔍 Run Inspection",
                 type="primary",
-                use_container_width=True
-            )
-
-            if run_inspection:
-
-                with st.spinner(
-                    "Running SmartQC inspection..."
-                ):
-
-                    result = predict_with_gradcam(
-                        image_rgb
-                    )
-
-                label = result["label"]
-                confidence = result["confidence"]
-                latency_ms = result["latency_ms"]
+                use_container_width=True,
+            ):
+                with st.spinner("Running inspection..."):
+                    result = predict_with_gradcam(image_rgb)
 
                 uncertain = (
-                    confidence <
-                    threshold / 100.0
+                    result["confidence"] < threshold / 100.0
                 )
 
                 result["uncertain"] = uncertain
 
-                # Save result for other tabs
                 st.session_state.last_result = {
                     **result,
                     "image": image_rgb,
-                    "filename": uploaded_file.name
+                    "filename": uploaded_file.name,
                 }
 
-                # Add history
                 add_history(
                     filename=uploaded_file.name,
-                    label=label,
-                    confidence=confidence,
-                    latency_ms=latency_ms,
-                    uncertain=uncertain
+                    label=result["label"],
+                    confidence=result["confidence"],
+                    latency_ms=result["latency_ms"],
+                    uncertain=uncertain,
                 )
-
-            # ---------------------------------------------------------------
-            # Display latest result
-            # ---------------------------------------------------------------
 
             last = st.session_state.last_result
 
             if last is not None:
 
-                label = last["label"]
-                confidence = last["confidence"]
-                latency_ms = last["latency_ms"]
-                uncertain = last["uncertain"]
+                result_box(
+                    last["label"],
+                    last["confidence"],
+                    last["uncertain"],
+                )
 
-                if uncertain:
+                m1, m2 = st.columns(2)
 
-                    st.warning(
-                        f"⚠️ UNCERTAIN — Best guess: "
-                        f"{label} "
-                        f"({confidence * 100:.1f}%)"
-                    )
-
-                elif label == "Good":
-
-                    st.success(
-                        f"✅ GOOD — "
-                        f"{confidence * 100:.1f}% confidence"
-                    )
-
-                else:
-
-                    st.error(
-                        f"❌ DEFECTIVE — "
-                        f"{confidence * 100:.1f}% confidence"
-                    )
-
-                metric1, metric2 = st.columns(2)
-
-                with metric1:
-
+                with m1:
                     st.metric(
                         "Confidence",
-                        f"{confidence * 100:.1f}%"
+                        f"{last['confidence'] * 100:.1f}%",
                     )
 
-                with metric2:
-
+                with m2:
                     st.metric(
                         "Latency",
-                        f"{latency_ms:.1f} ms"
+                        f"{last['latency_ms']:.1f} ms",
                     )
 
-                st.caption(
-                    "Backend: CPU (Streamlit server)"
-                )
+                st.caption("Backend: CPU (Streamlit server)")
 
-                st.markdown(
-                    "### Class Probabilities"
-                )
+                st.markdown("**Class probabilities**")
 
-                probability_df = pd.DataFrame(
+                prob_df = pd.DataFrame(
                     {
-                        "Probability": last[
-                            "per_class"
-                        ]
+                        "Probability": last["per_class"]
                     }
                 )
 
                 st.bar_chart(
-                    probability_df
+                    prob_df,
+                    height=180,
                 )
 
             else:
-
-                st.info(
-                    "Upload an image and click "
-                    "**Run Inspection**."
-                )
+                st.info("Run an inspection to see the result.")
 
 
-# ============================================================================
-# HISTORY TAB
-# ============================================================================
+# =============================================================================
+# HISTORY
+# =============================================================================
 
 with history_tab:
 
-    st.subheader(
-        "Inspection History"
-    )
-
-    st.caption(
-        "History shown here is for the current browser session."
-    )
-
     df_history = history_dataframe()
-
     summary = calculate_summary()
 
     if summary["total"] > 0:
 
         c1, c2, c3, c4 = st.columns(4)
 
-        with c1:
-            st.metric(
-                "Total",
-                summary["total"]
-            )
-
-        with c2:
-            st.metric(
-                "Good",
-                summary["good"]
-            )
-
-        with c3:
-            st.metric(
-                "Defective",
-                summary["defective"]
-            )
-
-        with c4:
-            st.metric(
-                "Uncertain",
-                summary["uncertain"]
-            )
-
-        st.divider()
+        c1.metric("Total", summary["total"])
+        c2.metric("Good", summary["good"])
+        c3.metric("Defective", summary["defective"])
+        c4.metric("Uncertain", summary["uncertain"])
 
         st.dataframe(
             df_history,
-            use_container_width=True,
-            hide_index=True
+            width="stretch",
+            hide_index=True,
         )
 
-        csv_history = df_history.to_csv(
-            index=False
-        )
+        csv_history = df_history.to_csv(index=False)
 
         st.download_button(
             "⬇️ Export History CSV",
             data=csv_history,
             file_name="smartqc_history.csv",
-            mime="text/csv"
+            mime="text/csv",
         )
 
-        if st.button(
-            "Clear Current Session History"
-        ):
-
+        if st.button("Clear Session History"):
             st.session_state.history = []
-
             st.rerun()
 
     else:
-
-        st.info(
-            "No inspections have been performed yet."
-        )
+        st.info("No inspections have been performed yet.")
 
 
-# ============================================================================
-# TREND TAB
-# ============================================================================
+# =============================================================================
+# TREND
+# =============================================================================
 
 with trend_tab:
-
-    st.subheader(
-        "Defect Rate Trend"
-    )
 
     df_history = history_dataframe()
 
@@ -980,51 +746,33 @@ with trend_tab:
 
         trend_df["Inspection #"] = range(
             1,
-            len(trend_df) + 1
+            len(trend_df) + 1,
         )
 
-        # Rolling defect rate
-        window = min(
-            10,
-            len(trend_df)
-        )
+        window = min(10, len(trend_df))
 
         trend_df["Rolling Defect Rate"] = (
             trend_df["Defective"]
             .rolling(
                 window=window,
-                min_periods=1
+                min_periods=1,
             )
             .mean()
+            * 100
         )
 
         trend_chart = trend_df[
-            [
-                "Inspection #",
-                "Rolling Defect Rate"
-            ]
-        ].set_index(
-            "Inspection #"
-        )
+            ["Inspection #", "Rolling Defect Rate"]
+        ].set_index("Inspection #")
 
         st.line_chart(
-            trend_chart
+            trend_chart,
+            height=260,
         )
-
-        st.caption(
-            "Rolling defect rate based on the inspections "
-            "performed during the current session."
-        )
-
-        st.divider()
 
         total = len(trend_df)
-
         defective = int(
-            (
-                trend_df["Result"]
-                == "Defective"
-            ).sum()
+            (trend_df["Result"] == "Defective").sum()
         )
 
         defect_rate = (
@@ -1033,393 +781,261 @@ with trend_tab:
 
         c1, c2, c3 = st.columns(3)
 
-        with c1:
-            st.metric(
-                "Total Inspections",
-                total
-            )
-
-        with c2:
-            st.metric(
-                "Defective",
-                defective
-            )
-
-        with c3:
-            st.metric(
-                "Defect Rate",
-                f"{defect_rate:.1f}%"
-            )
+        c1.metric("Inspections", total)
+        c2.metric("Defective", defective)
+        c3.metric("Defect Rate", f"{defect_rate:.1f}%")
 
     else:
-
-        st.info(
-            "Run a few inspections to generate the trend."
-        )
+        st.info("Run a few inspections to generate the trend.")
 
 
-# ============================================================================
-# EXPLAINABILITY TAB
-# ============================================================================
+# =============================================================================
+# EXPLAINABILITY
+# =============================================================================
 
 with explainability_tab:
-
-    st.subheader(
-        "Grad-CAM Explainability"
-    )
-
-    st.caption(
-        "Grad-CAM highlights image regions that influenced "
-        "the model's prediction."
-    )
 
     last = st.session_state.last_result
 
     if last is not None:
 
-        left, right = st.columns(2)
+        left, right = st.columns(
+            2,
+            gap="medium",
+        )
 
         with left:
-
-            st.markdown(
-                "### Original Image"
-            )
-
+            st.markdown("### Original")
             st.image(
                 last["image"],
-                width="stretch"
+                width="stretch",
             )
 
         with right:
-
-            st.markdown(
-                "### Grad-CAM Heatmap"
-            )
-
+            st.markdown("### Grad-CAM")
             st.image(
                 last["overlay"],
-                width="stretch"
+                width="stretch",
             )
-
-        st.divider()
 
         c1, c2 = st.columns(2)
 
-        with c1:
+        c1.metric(
+            "Prediction",
+            last["label"],
+        )
 
-            st.metric(
-                "Prediction",
-                last["label"]
-            )
+        c2.metric(
+            "Confidence",
+            f"{last['confidence'] * 100:.1f}%",
+        )
 
-        with c2:
-
-            st.metric(
-                "Confidence",
-                f"{last['confidence'] * 100:.1f}%"
-            )
-
-        st.info(
-            "Warmer regions such as red/yellow indicate "
-            "areas that contributed more strongly to the "
-            "model's decision. Grad-CAM is an explanation "
-            "of model attention, not a pixel-level defect mask."
+        st.caption(
+            "Grad-CAM highlights image regions that influenced "
+            "the prediction. It is not a pixel-level defect mask."
         )
 
     else:
-
         st.info(
             "Run an inspection first. "
             "The latest inspection will appear here."
         )
 
 
-# ============================================================================
-# BATCH INSPECTION TAB
-# ============================================================================
+# =============================================================================
+# BATCH
+# =============================================================================
 
 with batch_tab:
 
-    st.subheader(
-        "Batch Inspection"
-    )
+    st.markdown("### Batch Inspection")
 
     st.caption(
-        "Select a folder containing product images. "
-        "SmartQC will inspect all supported images in that folder."
+        "Select a folder. SmartQC will inspect all supported images inside it."
     )
 
     batch_files = st.file_uploader(
-        "Select a folder containing inspection images",
-        type=[
-            "png",
-            "jpg",
-            "jpeg"
-        ],
+        "Select inspection folder",
+        type=["png", "jpg", "jpeg"],
         accept_multiple_files="directory",
         key="batch_uploader",
-        help="Select a folder. SmartQC will inspect all supported images inside it."
+        help=(
+            "Select a folder. All supported PNG/JPG images "
+            "inside the folder will be uploaded for inspection."
+        ),
     )
 
     batch_threshold = st.slider(
-        "Batch confidence threshold (%)",
+        "Batch confidence threshold",
         min_value=50,
         max_value=99,
         value=70,
         step=1,
-        key="batch_threshold"
+        key="batch_threshold",
     )
 
     if batch_files:
 
-        st.write(
-            f"**{len(batch_files)} image(s) found in the selected folder.**"
+        st.success(
+            f"{len(batch_files)} image(s) found in the selected folder."
         )
 
         if st.button(
             "📦 Run Batch Inspection",
-            type="primary"
+            type="primary",
+            use_container_width=True,
         ):
 
             batch_results = []
-
-            progress = st.progress(
-                0
-            )
-
+            progress = st.progress(0)
             status = st.empty()
 
-            for index, file in enumerate(
-                batch_files
-            ):
+            for index, file in enumerate(batch_files):
 
                 status.write(
-                    f"Inspecting "
-                    f"{index + 1}/{len(batch_files)}: "
+                    f"Inspecting {index + 1}/{len(batch_files)}: "
                     f"{file.name}"
                 )
 
                 try:
-
-                    image = Image.open(
-                        file
-                    ).convert("RGB")
-
-                    image_rgb = np.array(
-                        image
-                    )
+                    image = Image.open(file).convert("RGB")
+                    image_rgb = np.array(image)
 
                     (
                         label,
                         confidence,
                         latency_ms,
-                        per_class
-                    ) = predict_image(
-                        image_rgb
-                    )
+                        per_class,
+                    ) = predict_image(image_rgb)
 
                     uncertain = (
-                        confidence <
-                        batch_threshold / 100.0
+                        confidence
+                        < batch_threshold / 100.0
                     )
 
-                    if uncertain:
-                        result_label = "Uncertain"
-                    else:
-                        result_label = label
+                    result_label = (
+                        "Uncertain"
+                        if uncertain
+                        else label
+                    )
 
                     row = {
                         "File": file.name,
                         "Result": result_label,
                         "Confidence (%)": round(
                             confidence * 100,
-                            1
+                            1,
                         ),
                         "Latency (ms)": round(
                             latency_ms,
-                            2
+                            2,
                         ),
-                        "Backend": "CPU"
+                        "Backend": "CPU",
                     }
 
-                    batch_results.append(
-                        row
-                    )
+                    batch_results.append(row)
 
-                    # Add to current history
                     add_history(
                         filename=file.name,
                         label=label,
                         confidence=confidence,
                         latency_ms=latency_ms,
-                        uncertain=uncertain
+                        uncertain=uncertain,
                     )
 
-                except Exception as e:
-
+                except Exception:
                     batch_results.append(
                         {
                             "File": file.name,
                             "Result": "Error",
                             "Confidence (%)": 0.0,
                             "Latency (ms)": 0.0,
-                            "Backend": "CPU"
+                            "Backend": "CPU",
                         }
                     )
 
                 progress.progress(
-                    (index + 1) /
-                    len(batch_files)
+                    (index + 1) / len(batch_files)
                 )
 
             status.empty()
 
-            batch_df = pd.DataFrame(
+            st.session_state.batch_results = pd.DataFrame(
                 batch_results
             )
 
-            st.session_state.batch_results = (
-                batch_df
-            )
-
             st.success(
-                f"Completed inspection of "
-                f"{len(batch_results)} image(s)."
+                f"Completed inspection of {len(batch_results)} image(s)."
             )
 
-    # ------------------------------------------------------------------------
-    # Display batch results
-    # ------------------------------------------------------------------------
+    batch_df = st.session_state.batch_results
 
-    if (
-        "batch_results"
-        in st.session_state
-        and not st.session_state.batch_results.empty
-    ):
-
-        batch_df = st.session_state.batch_results
+    if not batch_df.empty:
 
         st.divider()
-
-        st.markdown(
-            "### Batch Results"
-        )
+        st.markdown("### Results")
 
         st.dataframe(
             batch_df,
-            use_container_width=True,
-            hide_index=True
+            width="stretch",
+            hide_index=True,
         )
 
-        # Summary
         valid_results = batch_df[
             batch_df["Result"].isin(
-                [
-                    "Good",
-                    "Defective",
-                    "Uncertain"
-                ]
+                ["Good", "Defective", "Uncertain"]
             )
         ]
 
-        total = len(
-            valid_results
-        )
+        total = len(valid_results)
 
         good = int(
-            (
-                valid_results["Result"]
-                == "Good"
-            ).sum()
+            (valid_results["Result"] == "Good").sum()
         )
 
         defective = int(
-            (
-                valid_results["Result"]
-                == "Defective"
-            ).sum()
+            (valid_results["Result"] == "Defective").sum()
         )
 
         uncertain = int(
-            (
-                valid_results["Result"]
-                == "Uncertain"
-            ).sum()
+            (valid_results["Result"] == "Uncertain").sum()
         )
 
         c1, c2, c3, c4 = st.columns(4)
 
-        with c1:
-            st.metric(
-                "Total",
-                total
-            )
+        c1.metric("Total", total)
+        c2.metric("Good", good)
+        c3.metric("Defective", defective)
+        c4.metric("Uncertain", uncertain)
 
-        with c2:
-            st.metric(
-                "Good",
-                good
-            )
-
-        with c3:
-            st.metric(
-                "Defective",
-                defective
-            )
-
-        with c4:
-            st.metric(
-                "Uncertain",
-                uncertain
-            )
-
-        csv_batch = batch_df.to_csv(
-            index=False
-        )
+        csv_batch = batch_df.to_csv(index=False)
 
         st.download_button(
-            "⬇️ Export Batch Results to CSV",
+            "⬇️ Export Batch Results CSV",
             data=csv_batch,
             file_name="smartqc_batch_results.csv",
-            mime="text/csv"
+            mime="text/csv",
         )
 
-    else:
-
-        if not batch_files:
-
-            st.info(
-                "Select a folder above to start a batch inspection."
-            )
+    elif not batch_files:
+        st.info("Select a folder above to start a batch inspection.")
 
 
-# ============================================================================
-# FOOTER
-# ============================================================================
+# =============================================================================
+# COMPACT FOOTER
+# =============================================================================
 
 st.divider()
 
 st.markdown(
     f"""
     <div class="footer">
-
-    <b>SmartQC:</b> On-Device Visual Quality Inspection<br>
-
-    Built by Samay Thakur · Electronics & Instrumentation Engineering ·
-    M.S. Ramaiah Institute of Technology, Bengaluru, India
-
-    <br><br>
-
-    <a href="{GITHUB_URL}" target="_blank">
-    View source code and project documentation
-    </a>
-
-    <br><br>
-
-    Public web demo uses CPU inference.
-    Snapdragon NPU deployment belongs to the original desktop application.
-
+        <b>SmartQC</b> · Built by Samay Thakur ·
+        Electronics & Instrumentation Engineering ·
+        M.S. Ramaiah Institute of Technology ·
+        <a href="{GITHUB_URL}" target="_blank">GitHub</a>
+        · Public web demo uses CPU inference
     </div>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )

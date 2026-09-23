@@ -65,7 +65,6 @@ GITHUB_URL = (
 
 st.set_page_config(
     page_title="SmartQC — Visual Quality Inspection",
-    page_icon="🍞",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -630,7 +629,7 @@ with st.sidebar:
     st.divider()
 
     st.markdown(
-        f"[📂 View GitHub Repository]({GITHUB_URL})"
+        f"[View GitHub Repository]({GITHUB_URL})"
     )
 
 
@@ -646,11 +645,11 @@ with st.sidebar:
     batch_tab
 ) = st.tabs(
     [
-        "🔍 Inspection",
-        "📋 History",
-        "📈 Trend",
-        "🧠 Explainability",
-        "📦 Batch Inspect"
+        "Inspection",
+        "History",
+        "Trend",
+        "Explainability",
+        "Batch Inspect"
     ]
 )
 

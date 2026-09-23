@@ -1150,17 +1150,17 @@ with batch_tab:
         "SmartQC will inspect all supported images in that folder."
     )
 
-   batch_files = st.file_uploader(
-    "Select a folder containing inspection images",
-    type=[
-        "png",
-        "jpg",
-        "jpeg"
-    ],
-    accept_multiple_files="directory",
-    key="batch_uploader",
-    help="Select a folder. SmartQC will inspect all supported images inside it."
-  )
+    batch_files = st.file_uploader(
+        "Select a folder containing inspection images",
+        type=[
+            "png",
+            "jpg",
+            "jpeg"
+        ],
+        accept_multiple_files="directory",
+        key="batch_uploader",
+        help="Select a folder. SmartQC will inspect all supported images inside it."
+    )
 
     batch_threshold = st.slider(
         "Batch confidence threshold (%)",

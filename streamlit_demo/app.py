@@ -1146,7 +1146,8 @@ with batch_tab:
     )
 
     st.caption(
-        "Upload multiple product images and inspect them in one run."
+        "Select a folder containing product images. "
+        "SmartQC will inspect all supported images in that folder."
     )
 
    batch_files = st.file_uploader(
@@ -1173,7 +1174,7 @@ with batch_tab:
     if batch_files:
 
         st.write(
-            f"**{len(batch_files)} image(s) selected.**"
+            f"**{len(batch_files)} image(s) found in the selected folder.**"
         )
 
         if st.button(
@@ -1389,7 +1390,7 @@ with batch_tab:
         if not batch_files:
 
             st.info(
-                "Upload multiple images above to start a batch inspection."
+                "Select a folder above to start a batch inspection."
             )
 
 

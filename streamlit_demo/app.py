@@ -44,7 +44,6 @@ IMG_SIZE = 224
 
 st.set_page_config(
     page_title="SmartQC — Visual Quality Inspection",
-    page_icon="🍞",
     layout="wide"
 )
 
@@ -239,8 +238,7 @@ st.markdown(
     Grad-CAM heatmap showing which region influenced the decision.
 
     This model was trained to **99.2% validation accuracy** (0.9997 ROC-AUC)
-    and compiled/optimized for the **Snapdragon X Elite** via Qualcomm AI Hub
-    for the original desktop application.
+    and compiled/optimized for the **Snapdragon X Elite** via Qualcomm AI Hub.
 
     This web demo runs standard CPU inference for public sharing — see the
     [GitHub repo](https://github.com/samaythakur/SmartQC-On-Device-Visual-Quality-Inspection)
@@ -372,5 +370,5 @@ st.divider()
 
 st.caption(
     "Built by Samay Thakur — Electronics & Instrumentation Engineering, "
-    "M.S. Ramaiah Institute of Technology, Bengaluru."
+    "M.S. Ramaiah Institute of Technology, Bengaluru, India"
 )
